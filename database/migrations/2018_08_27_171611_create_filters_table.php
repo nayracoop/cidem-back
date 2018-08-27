@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServicesTable extends Migration
+class CreateFiltersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('filter_type_id');
             $table->string('slug');
             $table->string('name');
             $table->string('summary')->nullable();
@@ -23,6 +24,7 @@ class CreateServicesTable extends Migration
             $table->string('icon')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('filter_type_id')->references('id')->on('filter_types');
         });
     }
 
@@ -33,6 +35,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('filters');
     }
 }
