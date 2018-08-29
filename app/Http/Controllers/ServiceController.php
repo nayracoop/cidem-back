@@ -14,10 +14,15 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $perPage = 10;
         // obtener los articulos
-        $services = Service::paginate(10);
+        //filtramos nombre y descripcion
+        $services = Service::orWhere('name', 'like', "%$request->service%");
+        $services = $services->orWhere('description', 'like', "%$request->service%");
+        $services = $services->orWhere('summary', 'like', "%$request->service%");
+        $services = $services->paginate($request->has('per_page')? $request->per_page : $perPage);
 
         //collection de servicios
         return ServiceResource::collection($services);
