@@ -13,10 +13,10 @@ class FilterTypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('filter_types')->insert([
-             ['name' => 'Unidad', 'slug' => 'unidad'],
-            ['name' => 'Subunidad', 'slug' => 'subnidad'],
-            ['name' => 'Tipo de Servicio', 'slug' => 'tipo'],
-            ['name' => 'Sector', 'slug' => 'sector'],
+             ['id'=> 1, 'name' => 'Unidad', 'slug' => 'unidad'],
+            ['id'=> 2, 'name' => 'Subunidad', 'slug' => 'subnidad'],
+            ['id'=> 3, 'name' => 'Tipo de Servicio', 'slug' => 'tipo'],
+            ['id'=> 4, 'name' => 'Sector', 'slug' => 'sector'],
         ]);
     }
 }

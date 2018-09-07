@@ -22,6 +22,7 @@ class CreateFiltersTable extends Migration
             $table->text('description')->nullable();
             $table->string('website')->nullable();
             $table->string('icon')->nullable();
+            $table->integer('parent')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('filter_type_id')->references('id')->on('filter_types');
