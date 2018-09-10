@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Service;
+use App\Filter;
 use App\Http\Resources\Service as ServiceResource;
 
 class ServiceController extends Controller
@@ -78,5 +79,23 @@ class ServiceController extends Controller
         if ($service->delete()) {
             return new ServiceResource($service);
         }
+    }
+
+    #filtros
+    public function associateFilter($id, $idFilter)
+    {
+        $service = Service::find($id);
+        $filter =  Filter::find($idFilter);
+        $service->filters()->attach($filter);
+        #reemplazar response adecuada
+        return response();
+    }
+
+    public function removeFilter($id, $idFilter)
+    {
+        $service = Service::find($id);
+        $service->filters()->detach($id);
+        #reemplazar response adecuada
+        return response();
     }
 }
