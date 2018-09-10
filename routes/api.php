@@ -28,6 +28,10 @@ Route::put('service', 'ServiceController@store');
 // Eliminar servicios
 Route::delete('service/{id}', 'ServiceController@destroy');
 
+#obtener, agregar o quitar filtros
+Route::post('service/{id}/filter', 'ServiceController@associateFilter');
+Route::delete('service/{id}filter', 'ServiceController@removeFilter');
+
 #FilterType
 // listar todos los servicios
 Route::get('filter-types', 'FilterTypeController@index');
