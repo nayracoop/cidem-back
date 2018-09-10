@@ -20,26 +20,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // listar todos los servicios
 Route::get('services', 'ServiceController@index');
 // listar un solo articulo
-Route::get('service/{id}', 'ServiceController@show');
+Route::get('services/{id}', 'ServiceController@show');
 // Crear servicios
-Route::post('service', 'ServiceController@store');
+Route::post('services', 'ServiceController@store');
 // Actualizar servicio
-Route::put('service', 'ServiceController@store');
+Route::put('services', 'ServiceController@store');
 // Eliminar servicios
-Route::delete('service/{id}', 'ServiceController@destroy');
+Route::delete('services/{id}', 'ServiceController@destroy');
 
 #obtener, agregar o quitar filtros
-Route::post('service/{id}/filter/{idFilter}', 'ServiceController@associateFilter');
-Route::delete('service/{id}filter/{idFilter}', 'ServiceController@removeFilter');
+Route::post('services/{id}/filters/{idFilter}', 'ServiceController@associateFilter');
+Route::delete('services/{id}filters/{idFilter}', 'ServiceController@removeFilter');
 
 #FilterType
 // listar todos los servicios
 Route::get('filter-types', 'FilterTypeController@index');
 // listar un solo articulo
-Route::get('filter-type/{id}', 'FilterTypeController@show');
+Route::get('filter-types/{id}', 'FilterTypeController@show');
 // Crear servicios
-Route::post('filter-type', 'FilterTypeController@store');
+Route::post('filter-types', 'FilterTypeController@store');
 // Actualizar servicio
-Route::put('filter-type', 'FilterTypeController@store');
+Route::put('filter-types', 'FilterTypeController@store');
 // Eliminar servicios
-Route::delete('filter-type/{id}', 'FilterTypeController@destroy');
+Route::delete('filter-types/{id}', 'FilterTypeController@destroy');
