@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Filter;
+use App\Http\Resources\Filter as FilterResource;
 
 class FilterController extends Controller
 {
@@ -11,10 +14,10 @@ class FilterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $filters= Filter::all();
+        return FilterResource::collection($filters);    }
 
     /**
      * Show the form for creating a new resource.

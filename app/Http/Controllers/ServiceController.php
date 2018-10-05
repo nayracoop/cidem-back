@@ -20,14 +20,22 @@ class ServiceController extends Controller
         $perPage = 10;
         // obtener los articulos
         //filtramos nombre y descripcion
+        
+        //$services = Service::all();
+
+        #filtro por 
+        //hilo de consultas de elocuent
         $services = Service::orWhere('name', 'like', "%$request->service%");
         $services = $services->orWhere('description', 'like', "%$request->service%");
         $services = $services->orWhere('summary', 'like', "%$request->service%");
+
+
+
+        // paginate es tipo get y all devuelven una collection 
         $services = $services->paginate($request->has('per_page')? $request->per_page : $perPage);
 
         //collection de servicios
-        return ServiceResource::collection($services);
-    }
+        return ServiceResource::collection($services);    }
 
     /**
      * Store a newly created resource in storage.
