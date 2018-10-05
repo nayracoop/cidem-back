@@ -14,9 +14,4 @@ class Service extends Model
     {
         return $this->belongsToMany('App\Filter', 'filters_services', 'service_id', 'filter_id');
     }
-
-    public function queryFilter($filters)
-    {
-        
-    }
 }

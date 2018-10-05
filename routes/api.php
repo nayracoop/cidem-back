@@ -32,10 +32,18 @@ Route::delete('services/{id}', 'ServiceController@destroy');
 Route::post('services/{id}/filters/{idFilter}', 'ServiceController@associateFilter');
 Route::delete('services/{id}filters/{idFilter}', 'ServiceController@removeFilter');
 
+//oferta de filtros ordenados por tipo
+Route::get('filter-tree', 'FilterTypeController@filterTree');
+
+#Filters
+//listar todos los filtros
+Route::get('filters', 'FilterController@index');
+
+
 #FilterType
-// listar todos los servicios
+// listar todos los tipos de servicio
 Route::get('filter-types', 'FilterTypeController@index');
-// listar un solo articulo
+// listar un solo tipo de filtro
 Route::get('filter-types/{id}', 'FilterTypeController@show');
 // Crear servicios
 Route::post('filter-types', 'FilterTypeController@store');

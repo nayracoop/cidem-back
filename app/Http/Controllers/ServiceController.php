@@ -33,19 +33,15 @@ class ServiceController extends Controller
                 $services = $services->where('name', 'like', "%$request->service%");
             }
 
-            //filter by name, summary or description (tags?)
-            
-            #$services = $services->orWhere('description', 'like', "%$request->service%");
-            $services = $services->orWhere('summary', 'like', "%$request->service%");
+            //filter by name, slug, summary or description (tags?)
             $services = $services->orWhere('slug', 'like', "%$request->service%");
-            //pagination config by url query
-            
+            $services = $services->orWhere('summary', 'like', "%$request->service%");                        
         }
-
+        //pagination config by url query
         $services = isset($services) ? $services->paginate($request->has('per_page')? $request->per_page : $perPage): Service::all();
         //collection de servicios
         return ServiceResource::collection($services);
-    }
+        }
 
     /**
      * Store a newly created resource in storage.
