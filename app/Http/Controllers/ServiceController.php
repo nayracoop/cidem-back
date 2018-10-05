@@ -26,16 +26,17 @@ class ServiceController extends Controller
            });
         }
         if($request->has('service')) {
-            //$sint = $request->service;
-            if (!isset($services)) {
-                $services = Service::where('name', 'like', "%$request->service%");
-            } else {
-                $services = $services->where('name', 'like', "%$request->service%");
-            }
-
             //filter by name, slug, summary or description (tags?)
-            $services = $services->orWhere('slug', 'like', "%$request->service%");
-            $services = $services->orWhere('summary', 'like', "%$request->service%");                        
+            $funcWhere = function($query) use ($request){
+                $query->where('slug', 'LIKE', '%'.$request->service.'%')
+                    ->orWhere('name', 'LIKE', '%'.$request->service.'%')
+                    ->orWhere('summary', 'LIKE', '%'.$request->service.'%');
+            };
+            if (!isset($services)) {
+                $services = Service::where($funcWhere);
+            } else {
+                $services = $services->where($funcWhere);
+            }                     
         }
         //pagination config by url query
         $services = isset($services) ? $services->paginate($request->has('per_page')? $request->per_page : $perPage): Service::all();
