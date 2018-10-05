@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Filter as FilterResource;
 
 class Service extends JsonResource
 {
@@ -23,6 +24,7 @@ class Service extends JsonResource
             'description' => $this->description,
             'website' => $this->website,
             'icon' => $this->icon,
+            'filters' => FilterResource::collection($this->filters),
         ];
     }
 

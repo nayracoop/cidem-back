@@ -19,12 +19,30 @@ class ServiceController extends Controller
     {
         $perPage = 10;
         // obtener los articulos
-        //filtramos nombre y descripcion
-        $services = Service::orWhere('name', 'like', "%$request->service%");
-        $services = $services->orWhere('description', 'like', "%$request->service%");
-        $services = $services->orWhere('summary', 'like', "%$request->service%");
-        $services = $services->paginate($request->has('per_page')? $request->per_page : $perPage);
+       
+        if ($request->has('filters')) {        
+            $services = Service::whereHas('filters', function($query) use ($request){
+                $query->whereIn('id', $request->filters);
+           });
+        }
+        if($request->has('service')) {
+            //$sint = $request->service;
+            if (!isset($services)) {
+                $services = Service::where('name', 'like', "%$request->service%");
+            } else {
+                $services = $services->where('name', 'like', "%$request->service%");
+            }
 
+            //filter by name, summary or description (tags?)
+            
+            #$services = $services->orWhere('description', 'like', "%$request->service%");
+            $services = $services->orWhere('summary', 'like', "%$request->service%");
+            $services = $services->orWhere('slug', 'like', "%$request->service%");
+            //pagination config by url query
+            
+        }
+
+        $services = isset($services) ? $services->paginate($request->has('per_page')? $request->per_page : $perPage): Service::all();
         //collection de servicios
         return ServiceResource::collection($services);
     }
@@ -88,7 +106,7 @@ class ServiceController extends Controller
         $filter =  Filter::find($idFilter);
         $service->filters()->attach($filter);
         #reemplazar response adecuada
-        return response();
+        return new ServiceResource($service);
     }
 
     public function removeFilter($id, $idFilter)
