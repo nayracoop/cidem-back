@@ -51,3 +51,7 @@ Route::post('filter-types', 'FilterTypeController@store');
 Route::put('filter-types', 'FilterTypeController@store');
 // Eliminar servicios
 Route::delete('filter-types/{id}', 'FilterTypeController@destroy');
+
+#import | export
+Route::post('import', 'DataManagerController@importData');
+Route::get('dump', 'DataManagerController@exportData');
