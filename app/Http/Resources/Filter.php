@@ -17,7 +17,8 @@ class Filter extends JsonResource
         return [
             'id' => $this->id,
             'slug' => $this->slug,
-            'name' => $this->name,         
+            'name' => $this->name,
+            'filterType' => $this->filterType          
             
         ];
     }
