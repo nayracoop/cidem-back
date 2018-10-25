@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Filter extends Model
 {
+    protected $fillable = ['name', 'slug', 'tag', 'summary', 'description', 'filter_type_id'];
+
     use SoftDeletes;
     //
     public function filterType()

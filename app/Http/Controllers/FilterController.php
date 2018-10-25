@@ -17,7 +17,8 @@ class FilterController extends Controller
     public function index(Request $request)
     {
         $filters= Filter::all();
-        return FilterResource::collection($filters);    }
+        return FilterResource::collection($filters);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -38,6 +39,8 @@ class FilterController extends Controller
     public function store(Request $request)
     {
         //
+        $filter = Filter::create($request->input());
+        return new FilterResource($filter);
     }
 
     /**
