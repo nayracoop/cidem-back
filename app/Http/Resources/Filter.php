@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\FilterType as FilterTypeResource;
 
 class Filter extends JsonResource
 {
@@ -17,8 +18,9 @@ class Filter extends JsonResource
         return [
             'id' => $this->id,
             'slug' => $this->slug,
-            'name' => $this->name,         
-            
+            'tag' => $this->tag,
+            'name' => $this->name,
+            'filterType' => $this->filterType       
         ];
     }
 }
