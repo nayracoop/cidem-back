@@ -21,6 +21,7 @@ class Filter extends JsonResource
             'tag' => $this->tag,
             'name' => $this->name,
             'filterType' => $this->filterType       
+        }
         ];
     }
 }
