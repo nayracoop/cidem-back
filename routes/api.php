@@ -38,6 +38,8 @@ Route::get('filter-tree', 'FilterTypeController@filterTree');
 #Filters
 //listar todos los filtros
 Route::get('filters', 'FilterController@index');
+
+
 #FilterType
 // listar todos los tipos de servicio
 Route::get('filter-types', 'FilterTypeController@index');
