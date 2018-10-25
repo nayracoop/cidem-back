@@ -42,7 +42,6 @@ Route::get('filters', 'FilterController@index');
 
 Route::post('filters', 'FilterController@store');
 
-
 #FilterType
 // listar todos los tipos de servicio
 Route::get('filter-types', 'FilterTypeController@index');
