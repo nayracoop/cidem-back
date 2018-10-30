@@ -100,6 +100,14 @@ class ServiceController extends Controller
     public function associateFilter($id, $idFilter)
     {
         $service = Service::find($id);
+        $hasFilter = $service->filters->where('id', $idFilter)->first();
+
+        if ($hasFilter !== null) {
+            return response()->json([
+                'message' => 'filter "'.$hasFilter->name.'" is already associated'
+            ]);
+        }
+        
         $filter =  Filter::find($idFilter);
         $service->filters()->attach($filter);
         #reemplazar response adecuada
@@ -109,8 +117,15 @@ class ServiceController extends Controller
     public function removeFilter($id, $idFilter)
     {
         $service = Service::find($id);
+        $filter = $service->filters->where('id', $idFilter)->first();
+
+        if ($filter === null) {
+            return response()->json([
+                'message' => 'nothing to detach'
+            ]);
+        }
         $service->filters()->detach($id);
         #reemplazar response adecuada
-        return response();
+        return new ServiceResource($service);
     }
 }

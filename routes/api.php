@@ -30,7 +30,7 @@ Route::delete('services/{id}', 'ServiceController@destroy');
 
 #obtener, agregar o quitar filtros
 Route::post('services/{id}/filters/{idFilter}', 'ServiceController@associateFilter');
-Route::delete('services/{id}filters/{idFilter}', 'ServiceController@removeFilter');
+Route::delete('services/{id}/filters/{idFilter}', 'ServiceController@removeFilter');
 
 //oferta de filtros ordenados por tipo
 Route::get('filter-tree', 'FilterTypeController@filterTree');
