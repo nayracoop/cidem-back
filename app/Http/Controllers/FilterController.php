@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Filter;
 use App\Http\Resources\Filter as FilterResource;
+use App\Http\Resources\Service as ServiceResource;
 
 class FilterController extends Controller
 {
@@ -75,6 +76,9 @@ class FilterController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $filter = Filter::find($id);
+        $filter = $filter->update($request->input());
+        return new FilterResource($filter);
     }
 
     /**
@@ -86,5 +90,25 @@ class FilterController extends Controller
     public function destroy($id)
     {
         //
+        $filter = Filter::findOrFail($id);
+        $count = $filter->services->count();
+
+        if($count > 0) {
+            return response()->json([
+                'code' => 'CANNOT_DELETE',
+                'message' => 'Can not delete. The filter '.$filter->name.' has '.$count.' associated filters'
+            ]);
+        }
+
+        if ($filter->delete()) {
+            return new FilterResource($filter);
+        }
+    }
+    /**
+     * listar servicios asociados a un filtro
+     */
+    public function services($id) {
+        $filter = Filter::find($id);
+        return ServiceResource::collection($filter->services);
     }
 }

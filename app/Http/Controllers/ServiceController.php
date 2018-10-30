@@ -108,9 +108,10 @@ class ServiceController extends Controller
             ]);
         }
         
-        $filter =  Filter::find($idFilter);
-        $service->filters()->attach($filter);
+        //$filter =  Filter::find($idFilter);
+        $service->filters()->attach($idFilter);
         #reemplazar response adecuada
+        $service = Service::find($id);
         return new ServiceResource($service);
     }
 
@@ -124,8 +125,9 @@ class ServiceController extends Controller
                 'message' => 'nothing to detach'
             ]);
         }
-        $service->filters()->detach($id);
+        $service->filters()->detach($idFilter);
         #reemplazar response adecuada
+        $service = Service::find($id);
         return new ServiceResource($service);
     }
 }
