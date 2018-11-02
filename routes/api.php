@@ -41,7 +41,6 @@ Route::get('filters', 'FilterController@index');
 Route::post('filters', 'FilterController@store');
 Route::put('filters', 'FilterController@update');
 Route::delete('filters', 'FilterController@destroy');
-
 #listar sevicios asociados
 Route::get('filters/{idFilter}/services', 'FilterController@services');
 
@@ -56,6 +55,14 @@ Route::post('filter-types', 'FilterTypeController@store');
 Route::put('filter-types', 'FilterTypeController@store');
 // Eliminar servicios
 Route::delete('filter-types/{id}', 'FilterTypeController@destroy');
+
+#Messages
+#Filters
+//listar todos los mensajes
+Route::get('messages', 'MessageController@index');
+Route::post('messages', 'MessageController@store');
+Route::put('messages/{id}', 'MessageController@update');
+
 
 #import | export
 Route::post('import', 'DataManagerController@importData');
