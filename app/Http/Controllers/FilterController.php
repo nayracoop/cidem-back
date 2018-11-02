@@ -77,7 +77,7 @@ class FilterController extends Controller
     {
         //
         $filter = Filter::find($id);
-        $filter = $filter->update($request->input());
+        $filter->update($request->input());
         return new FilterResource($filter);
     }
 
