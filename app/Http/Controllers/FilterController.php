@@ -53,6 +53,8 @@ class FilterController extends Controller
     public function show($id)
     {
         //
+        $filter = Filter::findOrFail($id);
+        return new FilterResource($filter);
     }
 
     /**

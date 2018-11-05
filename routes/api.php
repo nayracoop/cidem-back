@@ -38,9 +38,10 @@ Route::get('filter-tree', 'FilterTypeController@filterTree');
 #Filters
 //listar todos los filtros
 Route::get('filters', 'FilterController@index');
+Route::get('filters/{id}', 'FilterController@show');
 Route::post('filters', 'FilterController@store');
 Route::put('filters', 'FilterController@update');
-Route::delete('filters', 'FilterController@destroy');
+Route::delete('filters/{id}', 'FilterController@destroy');
 
 #listar sevicios asociados
 Route::get('filters/{idFilter}/services', 'FilterController@services');
