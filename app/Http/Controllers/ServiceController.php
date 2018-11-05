@@ -52,22 +52,14 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $service = $request->isMethod('put') ?  : new Service;
-
-        $service->name = $request->input('name');
-        $service->slug = str_slug($service->name);
-        #chequear que el slug sea unique
-        $service->summary = $request->input('summary');
-        $service->description = $request->input('description');
-        $service->icon = $request->input('icon');
-        #subir img al server
-        $service->website = $request->input('website');
-
-        if ($service->save()) {
-            return new ServiceResource($service);
-        }
+        $service = Service::create($request->input());
+        return new ServiceResource($service);
     }
+
+    /**
+     * 
+     * 
+     */
     public function update(Request $request, $id)
     {
         $service = Service::findOrFail($id);

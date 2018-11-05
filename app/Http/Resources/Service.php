@@ -23,6 +23,10 @@ class Service extends JsonResource
             'summary' => $this->summary,
             'description' => $this->description,
             'website' => $this->website,
+            'contact_name' => $this->contact_name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'address' => $this->address,
             'icon' => $this->icon,
             'filters' => FilterResource::collection($this->filters),
         ];
