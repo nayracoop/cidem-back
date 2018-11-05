@@ -53,7 +53,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         //
-        $service = $request->isMethod('put') ? Service::findOrFail($request->service_id) : new Service;
+        $service = $request->isMethod('put') ?  : new Service;
 
         $service->name = $request->input('name');
         $service->slug = str_slug($service->name);
@@ -67,6 +67,13 @@ class ServiceController extends Controller
         if ($service->save()) {
             return new ServiceResource($service);
         }
+    }
+    public function update(Request $request, $id)
+    {
+        $service = Service::findOrFail($id);
+        $service->update($request->input());
+        return new ServiceResource($service);
+
     }
 
     /**

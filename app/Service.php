@@ -10,6 +10,9 @@ class Service extends Model
     //
     use SoftDeletes;
 
+    protected $fillable = ['name', 'slug', 'summary', 'description', 
+        'website', 'icon', 'contact_name', 'email', 'phone', 'address'];
+
     public function filters()
     {
         return $this->belongsToMany('App\Filter', 'filters_services', 'service_id', 'filter_id');
