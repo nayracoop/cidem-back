@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+//use Carbon\Carbon;
 
 class Message extends JsonResource
 {
@@ -21,6 +22,9 @@ class Message extends JsonResource
             'email' => $this->email,
             'description' => $this->description,
             'status' => $this->status,
+            'display_date' => $this->created_at->format('d-m-Y'),
+            'display_time' => $this->created_at->format('H:i'),
+
         ];
     }
 }
