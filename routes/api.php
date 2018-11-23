@@ -18,10 +18,6 @@ use Illuminate\Http\Request;
 });*/
 
 
-//login
-Route::post('login', 'Auth\AdminAccessController@authenticate');
-//logout
-
 // listar todos los servicios
 Route::get('services', 'ServiceController@index');
 // listar un solo articulo
@@ -46,8 +42,13 @@ Route::get('filter-types/{id}', 'FilterTypeController@show');
 
 #Messages
 //listar todos los mensajes
-Route::get('messages', 'MessageController@index');
+Route::post('messages', 'MessageController@store');
 
+
+//login
+Route::post('login', 'Auth\AdminAccessController@authenticate');
+
+#Auth
 Route::middleware(['apiAdmin'])->group(function(){
     Route::get('admin-status', 'Auth\AdminAccessController@adminStatus');
     Route::post('logout', 'Auth\AdminAccessController@logout');
@@ -77,8 +78,8 @@ Route::middleware(['apiAdmin'])->group(function(){
     Route::delete('filter-types/{id}', 'FilterTypeController@destroy');    
 
     #Messages
-    Route::post('messages', 'MessageController@store');
     Route::put('messages/{id}', 'MessageController@update');
+    Route::get('messages', 'MessageController@index');
 
     #import | export
     Route::post('import', 'DataManagerController@importData');
