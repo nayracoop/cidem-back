@@ -1,45 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\User;
+use Auth;
 
-class LoginController extends Controller
+class AdminAccessController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/admin';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
-     /**
      * Handle an authentication attempt.
      *
      * @param  \Illuminate\Http\Request $request
@@ -66,13 +35,23 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $user = $request->headers->has('x-api-key') ?
-            User::where('access_token', $request->header('x-api-key'))->first() : null;
+        $user = User::where('access_token', $request->header('x-api-key'))->first();
         if($user !== null) {
             $user->access_token = null;
             $user->save();
+            $message = 'logged out';
+        } else {
+            $message = 'nothing to do';
         }
 
         return response()->json(['status' => $message]);
+    }
+
+    /**
+     *  if pass the AdminAccess middlewase then is allowed!
+     */
+    public function adminStatus()
+    {
+        return response()->json(['status' => 'Authorized']);
     }
 }

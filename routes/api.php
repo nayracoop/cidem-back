@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 
 
 //login
-Route::post('login', 'Auth\LoginController@authenticate');
+Route::post('login', 'Auth\AdminAccessController@authenticate');
 //logout
 
 // listar todos los servicios
@@ -49,6 +49,8 @@ Route::get('filter-types/{id}', 'FilterTypeController@show');
 Route::get('messages', 'MessageController@index');
 
 Route::middleware(['apiAdmin'])->group(function(){
+    Route::get('admin-status', 'Auth\AdminAccessController@adminStatus');
+    Route::post('logout', 'Auth\AdminAccessController@logout');
     #servicios
     // Crear servicios
     Route::post('services', 'ServiceController@store');
