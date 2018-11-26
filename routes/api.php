@@ -35,7 +35,7 @@ Route::get('filters/{id}', 'FilterController@show');
 Route::get('filters/{idFilter}/services', 'FilterController@services');
 
 #FilterType
-// listar todos los tipos de servicio
+// listar todos los tipos de filtro
 Route::get('filter-types', 'FilterTypeController@index');
 // listar un solo tipo de filtro
 Route::get('filter-types/{id}', 'FilterTypeController@show');
@@ -43,7 +43,6 @@ Route::get('filter-types/{id}', 'FilterTypeController@show');
 #Messages
 //listar todos los mensajes
 Route::post('messages', 'MessageController@store');
-
 
 //login
 Route::post('login', 'Auth\AdminAccessController@authenticate');
