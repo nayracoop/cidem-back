@@ -37,14 +37,17 @@ Route::get('filters/{id}', 'FilterController@show');
 Route::get('filters/{idFilter}/services', 'FilterController@services');
 
 #FilterType
-// listar todos los tipos de servicio
+// listar todos los tipos de filtro
 Route::get('filter-types', 'FilterTypeController@index');
 // listar un solo tipo de filtro
 Route::get('filter-types/{id}', 'FilterTypeController@show');
 
 #Messages
 //listar todos los mensajes
-Route::get('messages', 'MessageController@index');
+Route::post('messages', 'MessageController@store');
+
+//login
+Route::post('login', 'Auth\AdminAccessController@authenticate');
 
 /**
  * admin routes
@@ -79,8 +82,8 @@ Route::middleware(['apiAdmin'])->group(function(){
     Route::delete('filter-types/{id}', 'FilterTypeController@destroy');    
 
     #Messages
-    Route::post('messages', 'MessageController@store');
     Route::put('messages/{id}', 'MessageController@update');
+    Route::get('messages', 'MessageController@index');
 
     #import | export
     Route::post('import', 'DataManagerController@importData');
