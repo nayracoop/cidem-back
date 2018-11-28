@@ -16,8 +16,6 @@ use Illuminate\Http\Request;
 /*Route::middleware('api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
-
-
 //login
 Route::post('login', 'Auth\AdminAccessController@authenticate');
 //logout
@@ -47,6 +45,10 @@ Route::get('filter-types/{id}', 'FilterTypeController@show');
 #Messages
 //listar todos los mensajes
 Route::get('messages', 'MessageController@index');
+
+/**
+ * admin routes
+ */
 
 Route::middleware(['apiAdmin'])->group(function(){
     Route::get('admin-status', 'Auth\AdminAccessController@adminStatus');

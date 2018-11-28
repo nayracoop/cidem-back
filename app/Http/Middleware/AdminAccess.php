@@ -26,6 +26,5 @@ class AdminAccess
         } else {
             return $unauthorized;
         }
-        
     }
 }
