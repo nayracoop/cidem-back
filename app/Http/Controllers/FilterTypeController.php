@@ -86,42 +86,4 @@ class FilterTypeController extends Controller
         //
     }
 
-    public function filterTree()
-    {
-        return response()->json([
-            "data" => 
-            [   
-                [
-                    "type" => "Frutas",
-                    "filters" => [
-                        ["id" => 1, "name" => "peras" ],   
-                        ["id" => 2, "name" => "manzanas" ],
-                        ["id" => 3, "name" => "uvas" ],
-                        ["id" => 4, "name" => "bananas" ],
-                        ["id" => 5, "name" => "naranjas" ],
-                    ]
-               ],
-               [
-                    "type" => "Verduras",
-                    "filters" => [
-                        ["id" => 6, "name" => "rucula" ],   
-                        ["id" => 7, "name" => "espinaca" ],
-                        ["id" => 8, "name" => "acelga" ],
-                        ["id" => 9, "name" => "lechuga" ],
-                    ]
-               ],
-               [
-                    "type" => "Bebidas",
-                    "filters" => [
-                            ["id" => 10, "name" => "agua" ],   
-                            ["id" => 11, "name" => "mate" ],
-                            ["id" => 12, "name" => "cafe" ],
-                            ["id" => 13, "name" => "vino" ],
-                            ["id" => 14, "name" => "cerveza" ],
-                    ]
-               ]
-            ]    
-
-        ]);
-    }
 }
